@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'authentication',
     'rest_framework',
     'corsheaders',
-    'wallets'
+    'wallets',
+    'transactions'
 ]
 
 MIDDLEWARE = [
