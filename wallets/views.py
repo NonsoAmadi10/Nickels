@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from .permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
 from .models import Wallet
+from transactions.models import Transactions
 from .serializers import WalletSerializer
 
 
@@ -39,6 +40,9 @@ class SingleWalletViews(RetrieveUpdateDestroyAPIView):
 
         wallet = get_object_or_404(Wallet.objects.filter(
             owner=self.request.user), pk=kwargs['uuid'])
+        if wallet:
+            Transactions.objects.create(
+                nickel_user=self.request.user, amount=request.data['value'], transaction_type='fund_wallet', origin='self')
         serializer = self.serializer_class(
             wallet, data=request.data, partial=True
         )

@@ -17,6 +17,7 @@ from django.urls import path, include, re_path
 
 urlpatterns = [
     re_path('^api/v1/auth/', include('authentication.urls')),
-    re_path('^api/v1/', include('wallets.urls'))
+    re_path('^api/v1/', include('wallets.urls')),
+    re_path('^api/v1/', include('transactions.urls'))
 
 ]
