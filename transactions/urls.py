@@ -1,6 +1,8 @@
-from django.urls import re_path
-from .views import AllTransactionsView
+from django.urls import re_path, path
+from .views import TransactionViewSets
 
 urlpatterns = [
-    re_path('^transactions', AllTransactionsView.as_view())
+    path('transactions', TransactionViewSets.as_view({'get': 'list'})),
+    path('transaction/<str:pk>',
+         TransactionViewSets.as_view({'get': 'retrieve'}))
 ]

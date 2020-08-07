@@ -40,9 +40,13 @@ class SingleWalletViews(RetrieveUpdateDestroyAPIView):
 
         wallet = get_object_or_404(Wallet.objects.filter(
             owner=self.request.user), pk=kwargs['uuid'])
+
         if wallet:
             Transactions.objects.create(
                 nickel_user=self.request.user, amount=request.data['value'], transaction_type='fund_wallet', origin='self')
+
+        request.data['value'] = float(
+            wallet.value) + float(request.data['value'])
         serializer = self.serializer_class(
             wallet, data=request.data, partial=True
         )

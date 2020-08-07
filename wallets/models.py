@@ -22,3 +22,7 @@ class Wallet(models.Model):
         unique_id = get_random_string(length=10)
         self.wallet_address = unique_id
         self.save()
+
+    def increase_value(self, figure):
+        self.value = self.value + figure
+        self.save()
